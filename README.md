@@ -1,10 +1,10 @@
-# Afval ophaal schema's!
+# Afval ophaalschema's!
 
 Dit document bevat een deel van het technisch ontwerp en de requirements van dit project.
 
 Veel overwegingen en argumentatie zijn bewust achterwege gelaten.
 
-## Architectuur keuze
+## Architectuurkeuze
 
 Dit project is opgezet als een twee-laagse architectuur. Er is namelijk een presentatie en een core laag. 
 De presentatie laag is verantwoordelijk voor het tonen van een website aan de gebruiker. Dit kan MVC of Razor Pages zijn.

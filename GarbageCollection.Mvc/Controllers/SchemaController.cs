@@ -20,7 +20,7 @@ public class SchemaController : Controller
         _service = new SchemaService();
     }
 
-    public IActionResult Index()
+    public IActionResult Index() // dit is een Action
     {
         IEnumerable<Schema> schemas = _service.GetAllSchemas();
 

@@ -5,3 +5,10 @@
 }
 
 <h2>Beschikbare bedrijven</h2>
+
+<ul>
+    @foreach (var company in Model.Companies)
+    {
+        <li><a asp-action="Details" asp-route-id="@company.CompanyName" >@company.CompanyName - @company.LocationCompanyActive</a></li>
+    }
+</ul>
