@@ -4,6 +4,8 @@ namespace GarbageCollection.Core.Services;
 
 public class SchemaService
 {
+    private static readonly List<Schema> _schemas = new();
+
     private readonly Schema _rwmSchema = new("RWM",
         new SchemaEntry(Garbage.Paper, DateTime.Today.AddDays(1)),
         new SchemaEntry(Garbage.Organic, DateTime.Today.AddDays(3)),
@@ -25,20 +27,34 @@ public class SchemaService
         new SchemaEntry(Garbage.Residual, DateTime.Today.AddDays(14))
     );
 
+    public SchemaService()
+    {
+        if (!_schemas.Any())
+        {
+            _schemas.Add(_rwmSchema);
+            _schemas.Add(_ganseWinkelSchema);
+            _schemas.Add(_suezSchema);
+        }
+    }
 
     public IEnumerable<Schema> GetAllSchemas()
     {
-        return new List<Schema>
-        {
-            _rwmSchema,
-            _ganseWinkelSchema,
-            _suezSchema
-        };
+        return _schemas;
     }
 
     public Schema? GetSchemaBy(string name)
     {
-        IEnumerable<Schema> schemas = GetAllSchemas();
-        return schemas.FirstOrDefault(s => s.CompanyName == name);
+        return _schemas.FirstOrDefault(s => s.CompanyName == name);
+    }
+
+    public string? AddSchema(Schema schema)
+    {
+        if (_schemas.Any(s => s.CompanyName == schema.CompanyName))
+        {
+            return "Company already exists";
+        }
+
+        _schemas.Add(schema);
+        return null;
     }
 }

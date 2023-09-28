@@ -2,3 +2,10 @@
 @model GarbageCollection.RazorPages.Pages.Schema.Index
 
 <h2>Beschikbare bedrijven</h2>
+
+<ul>
+    @foreach (var name in Model.ViewModel.CompanyNames)
+    {
+        <li><a asp-page="Details" asp-route-id="@name">@name</a></li>
+    }
+</ul>

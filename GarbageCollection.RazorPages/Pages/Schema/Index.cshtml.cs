@@ -4,10 +4,16 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace GarbageCollection.RazorPages.Pages.Schema;
 
+// Interessante documentatie:
+// Alles wat je kunt doen met razor syntax: https://learn.microsoft.com/en-us/aspnet/core/mvc/views/razor?view=aspnetcore-7.0#razor-syntax
+// Wat je kunt doet met "asp-", ook wel tag helpers genoemd: https://learn.microsoft.com/en-us/aspnet/core/mvc/views/tag-helpers/built-in/?view=aspnetcore-7.0
+//   - Bijvoorbeeld voor navigatie: https://learn.microsoft.com/en-us/aspnet/core/mvc/views/tag-helpers/built-in/anchor-tag-helper?view=aspnetcore-7.0
+//   - Bijvoorbeeld voor forms: https://learn.microsoft.com/en-us/aspnet/core/mvc/views/working-with-forms?view=aspnetcore-7.0#the-input-tag-helper
+
 public class Index : PageModel
 {
     private readonly SchemaService _service = new();
-    public required SchemasViewModel Model { get; set; }
+    public required SchemasViewModel ViewModel { get; set; }
 
     public void OnGet()
     {
@@ -19,7 +25,7 @@ public class Index : PageModel
             companyNames.Add(schema.CompanyName);
         }
 
-        Model = new SchemasViewModel
+        ViewModel = new SchemasViewModel
         {
             CompanyNames = companyNames
         };
