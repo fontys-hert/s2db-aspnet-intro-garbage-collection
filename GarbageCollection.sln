@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarbageCollection.Mvc", "GarbageCollection.Mvc\GarbageCollection.Mvc.csproj", "{8D118CED-7584-4551-A72F-703E247236FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarbageCollection.Core", "GarbageCollection.Core\GarbageCollection.Core.csproj", "{00115D12-7607-4AD6-9B34-DB9400C0A22B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8D118CED-7584-4551-A72F-703E247236FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D118CED-7584-4551-A72F-703E247236FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D118CED-7584-4551-A72F-703E247236FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D118CED-7584-4551-A72F-703E247236FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00115D12-7607-4AD6-9B34-DB9400C0A22B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00115D12-7607-4AD6-9B34-DB9400C0A22B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00115D12-7607-4AD6-9B34-DB9400C0A22B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00115D12-7607-4AD6-9B34-DB9400C0A22B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
