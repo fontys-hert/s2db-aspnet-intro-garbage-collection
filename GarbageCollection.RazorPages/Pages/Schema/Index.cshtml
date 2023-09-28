@@ -4,8 +4,8 @@
 <h2>Beschikbare bedrijven</h2>
 
 <ul>
-    @foreach (var name in Model.ViewModel.CompanyNames)
+    @foreach (var company in Model.ViewModel.Companies)
     {
-        <li><a asp-page="Details" asp-route-id="@name">@name</a></li>
+        <li><a asp-page="Details" asp-route-id="@company.CompanyName">@company.CompanyName - @company.LocationCompanyActive</a></li>
     }
 </ul>

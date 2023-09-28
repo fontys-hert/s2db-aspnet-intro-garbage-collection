@@ -22,7 +22,7 @@ public class New : PageModel
             return Page();
         }
 
-        _service.AddSchema(new Core.Models.Schema(ViewModel.CompanyName));
+        _service.AddSchema(new Core.Models.Schema(ViewModel.CompanyName, ViewModel.LocationCompanyActive));
 
         return RedirectToPage("/Schema/Index");
     }

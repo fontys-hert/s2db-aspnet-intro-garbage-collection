@@ -19,15 +19,19 @@ public class Index : PageModel
     {
         IEnumerable<Core.Models.Schema> schemas = _service.GetAllSchemas();
 
-        List<string> companyNames = new List<string>();
+        List<SchemaViewModel> companies = new List<SchemaViewModel>();
         foreach (var schema in schemas)
         {
-            companyNames.Add(schema.CompanyName);
+            companies.Add(new SchemaViewModel
+            {
+                CompanyName = schema.CompanyName,
+                LocationCompanyActive = schema.LocationCompanyActive
+            });
         }
 
         ViewModel = new SchemasViewModel
         {
-            CompanyNames = companyNames
+            Companies = companies
         };
     }
 }

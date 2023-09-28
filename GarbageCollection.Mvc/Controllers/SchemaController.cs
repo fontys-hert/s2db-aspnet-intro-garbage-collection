@@ -24,15 +24,19 @@ public class SchemaController : Controller
     {
         IEnumerable<Schema> schemas = _service.GetAllSchemas();
 
-        List<string> companyNames = new List<string>();
+        List<SchemaViewModel> companies = new List<SchemaViewModel>();
         foreach (var schema in schemas)
         {
-            companyNames.Add(schema.CompanyName);
+            companies.Add(new SchemaViewModel
+            {
+                CompanyName = schema.CompanyName,
+                LocationCompanyActive = schema.LocationCompanyActive
+            });
         }
 
         SchemasViewModel viewModel = new SchemasViewModel
         {
-            CompanyNames = companyNames
+            Companies = companies
         };
 
         return View(viewModel);
@@ -44,7 +48,24 @@ public class SchemaController : Controller
 
         if (schema == null) return NotFound();
 
-        return View(schema);
+        List<EntryDetailsViewModel> entryDetailsViewModels = new List<EntryDetailsViewModel>();
+        foreach (var entry in schema.Entries)
+        {
+            entryDetailsViewModels.Add(new EntryDetailsViewModel
+            {
+                Garbage = entry.Garbage,
+                PickupTime = entry.PickupTime
+            });
+        }
+
+        SchemaDetailsViewModel viewModel = new SchemaDetailsViewModel
+        {
+            CompanyName = schema.CompanyName,
+            LocationCompanyActive = schema.LocationCompanyActive,
+            Entries = entryDetailsViewModels
+        };
+
+        return View(viewModel);
     }
 
     public IActionResult New()
@@ -59,8 +80,8 @@ public class SchemaController : Controller
         {
             return View();
         }
-        
-        _service.AddSchema(new Schema(viewModel.CompanyName));
+
+        _service.AddSchema(new Schema(viewModel.CompanyName, viewModel.LocationCompanyActive));
         return RedirectToAction("Index");
     }
 }

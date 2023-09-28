@@ -6,21 +6,21 @@ public class SchemaService
 {
     private static readonly List<Schema> _schemas = new();
 
-    private readonly Schema _rwmSchema = new("RWM",
+    private readonly Schema _rwmSchema = new("RWM", "Zuid Nederland",
         new SchemaEntry(Garbage.Paper, DateTime.Today.AddDays(1)),
         new SchemaEntry(Garbage.Organic, DateTime.Today.AddDays(3)),
         new SchemaEntry(Garbage.Pmd, DateTime.Today.AddDays(7)),
         new SchemaEntry(Garbage.Residual, DateTime.Today.AddDays(-1))
     );
 
-    private readonly Schema _ganseWinkelSchema = new("Van Gansewinkel",
+    private readonly Schema _ganseWinkelSchema = new("Van Gansewinkel", "Midden Nederland",
         new SchemaEntry(Garbage.Organic, DateTime.Today.AddDays(1)),
         new SchemaEntry(Garbage.Paper, DateTime.Today.AddDays(2)),
         new SchemaEntry(Garbage.Pmd, DateTime.Today.AddDays(4)),
         new SchemaEntry(Garbage.Residual, DateTime.Today.AddDays(7))
     );
 
-    private readonly Schema _suezSchema = new("Suez",
+    private readonly Schema _suezSchema = new("Suez", "Noord Nederland",
         new SchemaEntry(Garbage.Pmd, DateTime.Today.AddDays(1)),
         new SchemaEntry(Garbage.Paper, DateTime.Today.AddDays(3)),
         new SchemaEntry(Garbage.Organic, DateTime.Today.AddDays(8)),
