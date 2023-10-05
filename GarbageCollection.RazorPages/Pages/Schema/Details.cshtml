@@ -1,4 +1,59 @@
 @page "{id}"
 @model GarbageCollection.RazorPages.Pages.Schema.Details
 
-<h2>Details</h2>
+@using GarbageCollection.Core.Models
+
+@{
+    ViewBag.Title = "title";
+
+    string ToFriendlyGarbageName(Garbage garbage)
+    {
+        return garbage switch {
+            Garbage.Organic => "GFT",
+            Garbage.Paper => "Papier",
+            Garbage.Pmd => "Plastic en co",
+            Garbage.Residual => "Rest",
+            _ => throw new NotImplementedException("Unknown garbase provided")
+            };
+    }
+
+    string ToFriendlyDate(DateTime dateTime)
+    {
+        DateTime date = dateTime.Date;
+        DateTime today = DateTime.Today;
+        
+        if (date == today.AddDays(1))
+        {
+            return "Morgen";
+        }
+        if (date == today.AddDays(2))
+        {
+            return "Overmorgen";
+        }
+        if (date > today.AddDays(7))
+        {
+            return "Volgende week";
+        }
+        return date.ToShortDateString();
+    }
+}
+
+<h2>@Model.ViewModel.CompanyName</h2>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Dag</th>
+        <th>Soort afval</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var schemaEntry in Model.ViewModel.Entries)
+    {
+        <tr>
+            <td>@ToFriendlyDate(schemaEntry.PickupTime)</td>
+            <td>@ToFriendlyGarbageName(schemaEntry.Garbage)</td>
+        </tr>
+    }
+    </tbody>
+</table>

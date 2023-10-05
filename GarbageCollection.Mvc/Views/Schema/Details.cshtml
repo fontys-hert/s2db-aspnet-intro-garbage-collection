@@ -1,6 +1,56 @@
+@using GarbageCollection.Core.Models
 @model SchemaDetailsViewModel
 @{
     ViewBag.Title = "title";
+
+    string ToFriendlyGarbageName(Garbage garbage)
+    {
+        return garbage switch {
+            Garbage.Organic => "GFT",
+            Garbage.Paper => "Papier",
+            Garbage.Pmd => "Plastic en co",
+            Garbage.Residual => "Rest",
+            _ => throw new NotImplementedException("Unknown garbase provided")
+            };
+    }
+
+    string ToFriendlyDate(DateTime dateTime)
+    {
+        DateTime date = dateTime.Date;
+        DateTime today = DateTime.Today;
+        
+        if (date == today.AddDays(1))
+        {
+            return "Morgen";
+        }
+        if (date == today.AddDays(2))
+        {
+            return "Overmorgen";
+        }
+        if (date > today.AddDays(7))
+        {
+            return "Volgende week";
+        }
+        return date.ToShortDateString();
+    }
 }
 
-<h2>Schema details!</h2>
+<h2>@Model.CompanyName</h2>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Dag</th>
+        <th>Soort afval</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var schemaEntry in Model.Entries)
+    {
+        <tr>
+            <td>@ToFriendlyDate(schemaEntry.PickupTime)</td>
+            <td>@ToFriendlyGarbageName(schemaEntry.Garbage)</td>
+        </tr>
+    }
+    </tbody>
+</table>
