@@ -1,4 +1,48 @@
 @page
 @model GarbageCollection.RazorPages.Pages.Schema.New
 
-<h2>Nieuwe afval ophaler!</h2>
+@using GarbageCollection.Core.Models
+
+<h2>Nieuwe afval ophaler</h2>
+
+<form method="post">
+    <div class="alert-danger" asp-validation-summary="All"></div>
+    <div class="mb-3">
+        <label asp-for="ViewModel.CompanyName" class="form-label">Bedrijf</label>
+        <input asp-for="ViewModel.CompanyName" class="form-control"></input>
+    </div>
+    <div class="mb-3">
+        <label asp-for="ViewModel.LocationCompanyActive" class="form-label">Locatie</label>
+        <input asp-for="ViewModel.LocationCompanyActive" class="form-control"></input>
+    </div>
+    <div class="entries">
+        <div class="entry row">
+            <div class="col">
+                <label asp-for="ViewModel.Entries[0].PickupDate" class="form-label">Dag</label>
+                <input asp-for="ViewModel.Entries[0].PickupDate" class="form-control">
+            </div>
+            <div class="col">
+                <label asp-for="ViewModel.Entries[0].Garbage" class="form-label">Afval</label>
+                <select asp-items="Enum.GetValues<Garbage>().Select(g => new SelectListItem(g.ToString(), g.ToString()))" asp-for="ViewModel.Entries[0].Garbage" class="form-select">
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="mb-3">
+        <button type="button" class="add-pickup btn btn-link rounded">voeg ophaal dag toe</button>
+    </div>
+    <div>
+        <button type="submit" class="btn btn-primary">Opslaan</button>
+    </div>
+</form>
+
+<script>
+document.querySelector('.add-pickup').addEventListener('click', () => {
+    const entry = document.querySelector('.entry');
+    const newEntry = entry.cloneNode(true);
+    const amountOfEntries = document.querySelectorAll('.entry').length;
+    
+    newEntry.innerHTML = newEntry.innerHTML.replaceAll('0', amountOfEntries.toString());
+    document.querySelector('.entries').appendChild(newEntry);
+});
+</script>

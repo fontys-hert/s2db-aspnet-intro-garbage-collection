@@ -18,7 +18,7 @@
     {
         DateTime date = dateTime.Date;
         DateTime today = DateTime.Today;
-        
+
         if (date == today.AddDays(1))
         {
             return "Morgen";
@@ -48,8 +48,8 @@
     @foreach (var schemaEntry in Model.Entries)
     {
         <tr>
-            <td>@ToFriendlyDate(schemaEntry.PickupTime)</td>
-            <td>@ToFriendlyGarbageName(schemaEntry.Garbage)</td>
+            <td>@schemaEntry.PickupTime</td>
+            <td>@schemaEntry.Garbage</td>
         </tr>
     }
     </tbody>

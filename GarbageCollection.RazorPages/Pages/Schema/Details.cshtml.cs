@@ -1,4 +1,5 @@
 using GarbageCollection.Core.Services;
+using GarbageCollection.DataAccess.repositories;
 using GarbageCollection.RazorPages.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -13,12 +14,12 @@ namespace GarbageCollection.RazorPages.Pages.Schema;
 
 public class Details : PageModel
 {
-    private readonly SchemaService _service = new();
+    private readonly SchemaService _service = new(new SchemaRepository());
     public required SchemaDetailsViewModel ViewModel { get; set; }
 
     public IActionResult OnGet(string id)
     {
-        Core.Models.Schema? schema = _service.GetSchemaBy(id);
+        Core.Models.Schema? schema = _service.GetBy(id);
 
         if (schema == null) return NotFound();
         
@@ -27,8 +28,8 @@ public class Details : PageModel
         {
             entryDetailsViewModels.Add(new EntryDetailsViewModel
             {
-                Garbage = entry.Garbage,
-                PickupTime = entry.PickupTime
+                Garbage = entry.ToFriendlyGarbageName(),
+                PickupTime = entry.ToFriendlyPickupDate()
             });
         }
 

@@ -1,3 +1,5 @@
+using GarbageCollection.DataAccess.dtos;
+
 namespace GarbageCollection.Core.Models;
 
 public class Schema
@@ -14,5 +16,10 @@ public class Schema
         CompanyName = companyName;
         LocationCompanyActive = locationCompanyActive;
         _entries = entries.ToList();
+    }
+
+    public static Schema From(SchemaDto dto)
+    {
+        return new Schema(dto.CompanyName, dto.LocationCompanyActive, dto.Entries.Select(SchemaEntry.From).ToArray());
     }
 }

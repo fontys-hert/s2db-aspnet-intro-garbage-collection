@@ -6,9 +6,4 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
-    <ItemGroup>
-      <ProjectReference Include="..\GarbageCollection.DataAccess\GarbageCollection.DataAccess.csproj" />
-    </ItemGroup>
-
-
 </Project>

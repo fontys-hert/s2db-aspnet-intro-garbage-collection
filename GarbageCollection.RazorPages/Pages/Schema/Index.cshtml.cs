@@ -1,4 +1,5 @@
 using GarbageCollection.Core.Services;
+using GarbageCollection.DataAccess.repositories;
 using GarbageCollection.RazorPages.ViewModels;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -12,12 +13,12 @@ namespace GarbageCollection.RazorPages.Pages.Schema;
 
 public class Index : PageModel
 {
-    private readonly SchemaService _service = new();
+    private readonly SchemaService _service = new(new SchemaRepository());
     public required SchemasViewModel ViewModel { get; set; }
 
     public void OnGet()
     {
-        IEnumerable<Core.Models.Schema> schemas = _service.GetAllSchemas();
+        IEnumerable<Core.Models.Schema> schemas = _service.GetAll();
 
         List<SchemaViewModel> companies = new List<SchemaViewModel>();
         foreach (var schema in schemas)

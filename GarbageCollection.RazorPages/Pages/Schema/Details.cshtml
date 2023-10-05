@@ -5,37 +5,6 @@
 
 @{
     ViewBag.Title = "title";
-
-    string ToFriendlyGarbageName(Garbage garbage)
-    {
-        return garbage switch {
-            Garbage.Organic => "GFT",
-            Garbage.Paper => "Papier",
-            Garbage.Pmd => "Plastic en co",
-            Garbage.Residual => "Rest",
-            _ => throw new NotImplementedException("Unknown garbase provided")
-            };
-    }
-
-    string ToFriendlyDate(DateTime dateTime)
-    {
-        DateTime date = dateTime.Date;
-        DateTime today = DateTime.Today;
-        
-        if (date == today.AddDays(1))
-        {
-            return "Morgen";
-        }
-        if (date == today.AddDays(2))
-        {
-            return "Overmorgen";
-        }
-        if (date > today.AddDays(7))
-        {
-            return "Volgende week";
-        }
-        return date.ToShortDateString();
-    }
 }
 
 <h2>@Model.ViewModel.CompanyName</h2>
@@ -51,8 +20,8 @@
     @foreach (var schemaEntry in Model.ViewModel.Entries)
     {
         <tr>
-            <td>@ToFriendlyDate(schemaEntry.PickupTime)</td>
-            <td>@ToFriendlyGarbageName(schemaEntry.Garbage)</td>
+            <td>@schemaEntry.PickupTime</td>
+            <td>@schemaEntry.Garbage</td>
         </tr>
     }
     </tbody>

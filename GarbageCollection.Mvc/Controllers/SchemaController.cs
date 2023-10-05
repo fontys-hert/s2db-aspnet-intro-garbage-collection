@@ -1,5 +1,6 @@
 using GarbageCollection.Core.Models;
 using GarbageCollection.Core.Services;
+using GarbageCollection.DataAccess.repositories;
 using GarbageCollection.Mvc.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,12 +18,12 @@ public class SchemaController : Controller
 
     public SchemaController()
     {
-        _service = new SchemaService();
+        _service = new SchemaService(new SchemaRepository());
     }
 
     public IActionResult Index() // dit is een Action
     {
-        IEnumerable<Schema> schemas = _service.GetAllSchemas();
+        IEnumerable<Schema> schemas = _service.GetAll();
 
         List<SchemaViewModel> companies = new List<SchemaViewModel>();
         foreach (var schema in schemas)
@@ -44,7 +45,7 @@ public class SchemaController : Controller
 
     public IActionResult Details(string id)
     {
-        Schema? schema = _service.GetSchemaBy(id);
+        Schema? schema = _service.GetBy(id);
 
         if (schema == null) return NotFound();
 
@@ -53,8 +54,8 @@ public class SchemaController : Controller
         {
             entryDetailsViewModels.Add(new EntryDetailsViewModel
             {
-                Garbage = entry.Garbage,
-                PickupTime = entry.PickupTime
+                Garbage = entry.ToFriendlyGarbageName(),
+                PickupTime = entry.ToFriendlyPickupDate()
             });
         }
 
@@ -81,7 +82,8 @@ public class SchemaController : Controller
             return View();
         }
 
-        _service.AddSchema(new Schema(viewModel.CompanyName, viewModel.LocationCompanyActive));
+        SchemaEntry[] entries = viewModel.Entries.Select(e => new SchemaEntry(e.Garbage, e.PickupDate)).ToArray();
+        _service.Add(new Schema(viewModel.CompanyName, viewModel.LocationCompanyActive, entries));
         return RedirectToAction("Index");
     }
 }

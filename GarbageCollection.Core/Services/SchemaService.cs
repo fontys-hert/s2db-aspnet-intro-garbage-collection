@@ -1,60 +1,52 @@
 using GarbageCollection.Core.Models;
+using GarbageCollection.DataAccess.dtos;
+using GarbageCollection.DataAccess.repositories;
 
 namespace GarbageCollection.Core.Services;
 
 public class SchemaService
 {
-    private static readonly List<Schema> _schemas = new();
+    private readonly SchemaRepository _repository;
 
-    private readonly Schema _rwmSchema = new("RWM", "Zuid Nederland",
-        new SchemaEntry(Garbage.Paper, DateTime.Today.AddDays(1)),
-        new SchemaEntry(Garbage.Organic, DateTime.Today.AddDays(3)),
-        new SchemaEntry(Garbage.Pmd, DateTime.Today.AddDays(7)),
-        new SchemaEntry(Garbage.Residual, DateTime.Today.AddDays(-1))
-    );
-
-    private readonly Schema _ganseWinkelSchema = new("Van Gansewinkel", "Midden Nederland",
-        new SchemaEntry(Garbage.Organic, DateTime.Today.AddDays(1)),
-        new SchemaEntry(Garbage.Paper, DateTime.Today.AddDays(2)),
-        new SchemaEntry(Garbage.Pmd, DateTime.Today.AddDays(4)),
-        new SchemaEntry(Garbage.Residual, DateTime.Today.AddDays(7))
-    );
-
-    private readonly Schema _suezSchema = new("Suez", "Noord Nederland",
-        new SchemaEntry(Garbage.Pmd, DateTime.Today.AddDays(1)),
-        new SchemaEntry(Garbage.Paper, DateTime.Today.AddDays(3)),
-        new SchemaEntry(Garbage.Organic, DateTime.Today.AddDays(8)),
-        new SchemaEntry(Garbage.Residual, DateTime.Today.AddDays(14))
-    );
-
-    public SchemaService()
+    public SchemaService(SchemaRepository repository)
     {
-        if (!_schemas.Any())
-        {
-            _schemas.Add(_rwmSchema);
-            _schemas.Add(_ganseWinkelSchema);
-            _schemas.Add(_suezSchema);
-        }
+        _repository = repository;
     }
 
-    public IEnumerable<Schema> GetAllSchemas()
+    public IEnumerable<Schema> GetAll()
     {
-        return _schemas;
+        IEnumerable<SchemaDto> schemaDtos = _repository.GetAll();
+        List<Schema> schemas = schemaDtos.Select(Schema.From).ToList();
+        return schemas;
     }
 
-    public Schema? GetSchemaBy(string name)
+    public Schema? GetBy(string name)
     {
-        return _schemas.FirstOrDefault(s => s.CompanyName == name);
+        SchemaDto? dto = _repository.GetBy(name);
+        if (dto == null) return null;
+        return Schema.From(dto);
     }
 
-    public string? AddSchema(Schema schema)
+    public string? Add(Schema schema)
     {
-        if (_schemas.Any(s => s.CompanyName == schema.CompanyName))
+        if (GetBy(schema.CompanyName) != null)
         {
             return "Company already exists";
         }
 
-        _schemas.Add(schema);
+        SchemaDto dto = new SchemaDto
+        {
+            CompanyName = schema.CompanyName,
+            LocationCompanyActive = schema.LocationCompanyActive,
+            Entries = schema.Entries.Select(e => new SchemaEntryDto
+            {
+                Garbage = e.Garbage.ToString(),
+                PickupTime = e.PickupTime
+            }).ToList()
+        };
+
+        _repository.Add(dto);
+        
         return null;
     }
 }
