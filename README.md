@@ -1,10 +1,44 @@
 # Afval ophaalschema's!
 
+- [Workshop unit testing](#workshop-razor-views-en-html)
+- [Documentatie](#documentatie)
+
+## Workshop Razor views en HTML
+
+### Plaats binnen het semester
+
+- Aan het begin van de implementatie fase (week 4 t/m 8)
+- Voordat men aan de slag gaat met deze workshop is het verstandig om de workshop op de `main` branch te doen!
+
+### Het doel van deze workshop
+
+- Kennis maken met het schrijven van unit tests
+- (Optioneel) Kennis maken met het schrijven van integratie tests
+- Bekend raken met het lezen en gebruiken van andermans code
+
+### Wat moet je doen
+
+- Schrijf code voor de lege test methodes in de `SchemaEntryModelTests.cs` class in het `GarbageCollection.Tests` project.
+- Schrijf zelf nieuwe tests in de `SchemaEntryModelTests.cs` class aan de hand van de `// TODO` comment onderaan de file.
+- (Optioneel) Schrijf code voor de lege test methodes in de `SchemaEntryServiceTests.cs` class in het `GarbageCollection.Tests` project.
+  - Zorg ervoor dat de testen die je schrijft niet daadwerkelijk data wegschijven naar andere files!
+
+### De opdracht
+
+De opdracht is om te zorgen dat de meest belangrijke logica van de applicatie getest is.
+
+**Let op**: het zou goed kunnen dat er fouten zijn gemaakt in de code.
+Overleg altijd eerst met je docent voordat je aanpassingen maakt aan de code.
+
+---
+
+## Documentatie
+
 Dit document bevat een deel van het technisch ontwerp en de requirements van dit project.
 
 Veel overwegingen en argumentatie zijn bewust achterwege gelaten.
 
-## Architectuurkeuze
+### Architectuurkeuze
 
 Dit project is opgezet als een twee-laagse architectuur. Er is namelijk een presentatie en een core laag. 
 De presentatie laag is verantwoordelijk voor het tonen van een website aan de gebruiker. Dit kan MVC of Razor Pages zijn.
@@ -22,7 +56,7 @@ In deze folder staan drie projecten:
 Voor diegene die hier aan verder werken, **kies 1 van de twee presentatie lagen (MVC of Razor Pages)** en ga hiermee aan de slag.
 Uiteraard moedigen we iedereen aan die beiden wil uitproberen.
 
-### Additionele informatie
+#### Additionele informatie
 
 - Programmeertaal: C#
 - Framework versie: .NET 7
