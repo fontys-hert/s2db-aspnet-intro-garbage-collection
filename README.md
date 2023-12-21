@@ -56,7 +56,7 @@ Uiteraard moedigen we iedereen aan die beiden wil uitproberen.
 - Framework versie: .NET 7
 
 
-## User stories
+### User stories
 
 Hieronder volgen de user stories genummerd op prioriteit. De lijst die volg onder iedere user story geeft weer wat de acceptatie criteria zijn.
 
