@@ -1,10 +1,38 @@
 # Afval ophaalschema's!
 
+- [Workshop Razor views en html](#workshop-razor-views-en-html)
+- [Documentatie](#documentatie)
+
+## Workshop Razor views en HTML
+
+### Plaats binnen het semester
+
+- Aan het begin van de implementatie fase (week 4 t/m 8)
+
+### Het doel van deze workshop
+
+- Leren werken met Razor views binnen MVC of Razor Pages en HTML
+- Bekend raken met het lezen en gebruiken van andermans code
+
+### Wat moet je doen
+
+- Lees de [documentatie](#documentatie) door en bekijk de [user stories](#user-stories).
+- Kies een van de twee presentatie lagen (MVC of Razor Pages) en ga hiermee aan de slag.
+- Werk de user stories uit in de gekozen presentatie laag.
+
+### De opdracht
+
+De opdracht is om een website te maken waarop de gebruiker een overzicht kan zien van verschillende afval ophaal bedrijven.
+
+---
+
+## Documentatie
+
 Dit document bevat een deel van het technisch ontwerp en de requirements van dit project.
 
 Veel overwegingen en argumentatie zijn bewust achterwege gelaten.
 
-## Architectuurkeuze
+### Architectuurkeuze
 
 Dit project is opgezet als een twee-laagse architectuur. Er is namelijk een presentatie en een core laag. 
 De presentatie laag is verantwoordelijk voor het tonen van een website aan de gebruiker. Dit kan MVC of Razor Pages zijn.
@@ -22,7 +50,7 @@ In deze folder staan drie projecten:
 Voor diegene die hier aan verder werken, **kies 1 van de twee presentatie lagen (MVC of Razor Pages)** en ga hiermee aan de slag.
 Uiteraard moedigen we iedereen aan die beiden wil uitproberen.
 
-### Additionele informatie
+#### Additionele informatie
 
 - Programmeertaal: C#
 - Framework versie: .NET 7
